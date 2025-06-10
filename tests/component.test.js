@@ -69,7 +69,7 @@ function teste_10_checkboxFunciona() {
   }
 }
 
-window.testesComponente = {
+window.testesComponent = {
   teste_1_adicionaItemHistorico,
   teste_2_ultimoItemTextoCorreto,
   teste_3_limparHistorico,
