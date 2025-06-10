@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Gerador de Frases Motivacionais</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <h1>Gerador de Frases Motivacionais</h1>
+
+  <button id="btnGerarFrase">Gerar Frase</button>
+
+  <section id="adicionar-frase">
+    <h2>Adicionar Frase Personalizada</h2>
+    <input type="text" id="inputFrasePersonalizada" placeholder="Digite sua frase motivacional" />
+    <button id="btnAdicionarFrase">Adicionar Frase</button>
+  </section>
+
+  <hr />
+
+  <section id="historico-section">
+    <h2>Histórico de Frases</h2>
+    <ul id="historico-lista"></ul>
+    <button id="limparHistoricoBtn">Limpar Histórico</button>
+  </section>
+
+  <section id="configuracoes">
+    <h2>Configurações</h2>
+    <label>
+      <input type="checkbox" id="mostrarMensagens" checked />
+      Mostrar mensagens após gerar frase
+    </label>
+  </section>
+
+  <section id="mensagemFeedback" style="display: none;">
+    <p id="mensagemTexto">Frase gerada com sucesso!</p>
+  </section>
+
+  <hr />
+
+  <p>Frase Atual: <span id="fraseAtual">Nenhuma frase gerada ainda.</span></p>
+
+  <button id="rodarTestesUnitBtn">Rodar Testes Unitários</button>
+  <button id="rodarTestesComponentBtn">Rodar Testes Component</button>
+
+  <div id="testes-resultados"></div>
+
+  <script src="src/frases.js"></script>
+  <script src="src/rodarTestes.js"></script>
+  <script src="tests/unitario.test.js"></script>
+  <script src="tests/component.test.js"></script>
+  <script src="src/app.js"></script> <!-- Seu script principal -->
+</body>
+
+</html>
