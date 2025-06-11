@@ -14,7 +14,12 @@
 
   <section id="adicionar-frase">
     <h2>Adicionar Frase Personalizada</h2>
-    <input type="text" id="inputFrasePersonalizada" placeholder="Digite sua frase motivacional" />
+    <input
+      type="text"
+      id="inputFrasePersonalizada"
+      placeholder="Digite sua frase motivacional"
+      maxlength="100"
+    />
     <button id="btnAdicionarFrase">Adicionar Frase</button>
   </section>
 
@@ -47,11 +52,67 @@
 
   <div id="testes-resultados"></div>
 
+  <!-- Scripts externos -->
   <script src="src/frases.js"></script>
   <script src="src/rodarTestes.js"></script>
   <script src="tests/unitario.test.js"></script>
   <script src="tests/component.test.js"></script>
-  <script src="src/app.js"></script> <!-- Seu script principal -->
+  <script src="src/app.js"></script>
+
+  <!-- Script de validação incorporado sem mensagens de erro -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const inputFrase = document.getElementById('inputFrasePersonalizada');
+      const btnAdicionar = document.getElementById('btnAdicionarFrase');
+      const historicoLista = document.getElementById('historico-lista');
+      const fraseAtualSpan = document.getElementById('fraseAtual');
+      const mensagemFeedback = document.getElementById('mensagemFeedback');
+      const mensagemTexto = document.getElementById('mensagemTexto');
+
+      btnAdicionar.addEventListener('click', () => {
+        const frase = inputFrase.value.trim();
+
+        // Validação: comprimento e caracteres válidos (sem números e sem $)
+        if (
+          frase.length < 10 ||
+          frase.length > 100 ||
+          !/^[a-zA-ZÀ-ÖØ-öø-ÿ\s.,!?'\-]+$/.test(frase)
+        ) {
+          return; // ignora sem mensagem
+        }
+
+        // Adiciona frase ao histórico
+        const li = document.createElement('li');
+        li.textContent = frase;
+        historicoLista.appendChild(li);
+
+        // Atualiza frase atual
+        fraseAtualSpan.textContent = frase;
+
+        // Mostra mensagem de sucesso se estiver habilitado
+        if (document.getElementById('mostrarMensagens').checked) {
+          mostrarMensagem('Frase gerada com sucesso!', false);
+        }
+
+        // Limpa input
+        inputFrase.value = '';
+      });
+
+      function mostrarMensagem(texto, erro = false) {
+        mensagemTexto.textContent = texto;
+        mensagemTexto.style.color = erro ? 'red' : 'green';
+        mensagemFeedback.style.display = 'block';
+        setTimeout(() => {
+          mensagemFeedback.style.display = 'none';
+        }, 3000);
+      }
+
+      document.getElementById('limparHistoricoBtn').addEventListener('click', () => {
+        historicoLista.innerHTML = '';
+        fraseAtualSpan.textContent = 'Nenhuma frase gerada ainda.';
+      });
+    });
+  </script>
 </body>
 
 </html>
